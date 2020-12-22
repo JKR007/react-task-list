@@ -11,9 +11,14 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
     $ git clone https://github.com/JKR007/react-task-list.git
     $ cd react-task-list
     $ yarn install
-    
+
+## It is used fake REST API to make HTTP requests
+
+- https://jsonplaceholder.typicode.com/
+
 ## Check this app on GitHub pages
-    https://jkr007.github.io/react-task-list/
+
+- https://jkr007.github.io/react-task-list/
 
 ## Available Scripts
 
