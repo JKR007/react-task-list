@@ -9,17 +9,19 @@ import InputTask from './InputTask';
 class TasklistContainer extends React.Component {
   state = {
     tasks: [],
+    rainbowStatus: false,
   };
 
   // This handle method for marking the Tasks as completed
   handleChange = (id) => {
     this.setState((prevState) => ({
       tasks: prevState.tasks.map((task) => {
-      if(task.id === id) {
-        task.completed = !task.completed;
-      }
-      return task
-      })
+        if(task.id === id) {
+          task.completed = !task.completed;
+        }
+        return task
+        }),
+      rainbowStatus: !this.state.rainbowStatus,
     }));
   };
 
@@ -64,7 +66,7 @@ class TasklistContainer extends React.Component {
   render() {
     return (
       <div className="container">
-        <Header />
+        <Header status={this.state.rainbowStatus}/>
         <InputTask addTaskProps={this.addTask} />
         <Tasklist
           tasks={this.state.tasks}
