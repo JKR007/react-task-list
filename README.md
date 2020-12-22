@@ -11,6 +11,9 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
     $ git clone https://github.com/JKR007/react-task-list.git
     $ cd react-task-list
     $ yarn install
+    
+## Check this app on GitHub pages
+    https://jkr007.github.io/react-task-list/
 
 ## Available Scripts
 
