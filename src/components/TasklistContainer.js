@@ -1,5 +1,6 @@
 import React from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import axios from 'axios';
 
 import Tasklist from './Tasklist';
 import Header from './Header';
@@ -7,23 +8,7 @@ import InputTask from './InputTask';
 
 class TasklistContainer extends React.Component {
   state = {
-    tasks: [
-      {
-        id: uuidv4(),
-        title: "Setup development environment",
-        completed: true
-      },
-      {
-        id: uuidv4(),
-        title: "Develop website and add content",
-        completed: false
-      },
-      {
-        id: uuidv4(),
-        title: "Deploy to live server",
-        completed: false
-      }
-    ]
+    tasks: [],
   };
 
   // This handle method for marking the Tasks as completed
@@ -39,24 +24,40 @@ class TasklistContainer extends React.Component {
   };
 
   deleteTask = (id) => {
-  this.setState({
-    tasks: [
-      ...this.state.tasks.filter(task => {
-        return task.id !== id;
-      })
-    ]
-  });
+    axios.delete(`https://jsonplaceholder.typicode.com/todos/${id}`)
+         .then((response) => {
+           this.setState({
+             tasks: [
+               ...this.state.tasks.filter((task) => {
+                 return task.id !== id;
+               })
+             ]
+           })
+         });
   };
 
   addTask = (title) => {
-    const newTask = {
-      id: uuidv4(),
-      title: title,
-      completed: false
-    };
+    if(!title) return;
 
-    this.setState({
-      tasks: [...this.state.tasks, newTask]
+    axios.post('https://jsonplaceholder.typicode.com/todos', {
+        title: title,
+        completed: false
+    }).then((response) => {
+      this.setState({
+        tasks: [...this.state.tasks, response.data]
+      })
+    });
+  };
+
+  componentDidMount() {
+    axios.get('https://jsonplaceholder.typicode.com/todos', {
+      params: {
+        _limit: 10
+      }
+    }).then((response) => {
+      this.setState({
+        tasks: response.data
+      })
     });
   };
 
