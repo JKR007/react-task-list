@@ -1,21 +1,26 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class Header extends Component {
-  componentDidUpdate(prevProps, prevState) {
-    // let randomColor = '#'+Math.floor(Math.random()*16777215).toString(16);
-    // Generate light colors
-    let randomColor = "hsl(" + Math.random() * 360 + ", 100%, 75%)";
+const Header = () => {
+  const headerStyle = {
+    padding: "20px 0",
+    lineHeight: "1.5em"
+  }
 
-    if(prevProps.status !== this.props.status) {
-      document.getElementById('rainbow').style.backgroundColor = randomColor;
-    }
-  };
-
-  render() {
-    return (
-      <div>Header!</div>
-    );
-  };
+  return (
+    <header style={headerStyle}>
+      <h1
+        style={{
+          fontSize: "6rem",
+          fontWeight: "600",
+          marginBottom: "2rem",
+          lineHeight: "1em",
+          color: "#ececec",
+          textTransform: "lowercase",
+          textAlign: "center"
+        }}
+      >Task List</h1>
+    </header>
+  )
 }
 
 export default Header;

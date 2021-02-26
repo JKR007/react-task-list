@@ -4,9 +4,11 @@ import TasklistItem from './TasklistItem';
 class Tasklist extends React.Component {
   render() {
     return (
-      <div>
-        Tasklist
-      </div>
+      <ul>
+        {this.props.tasks.map((task) => (
+          <TasklistItem key={task.id} task={task} handleClickOnComplete={this.props.handleClickOnComplete} deleteTask={this.props.deleteTask} />
+        ))}
+      </ul>
     );
   };
 }
