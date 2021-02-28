@@ -12,7 +12,7 @@ class TasklistContainer extends React.Component {
     tasks: [
       {
         id: uuidv4(),
-        title: 'Find a good girl!',
+        title: 'Find a good girl who looks after to mom and marry to her!',
         completed: true
       },
       {
@@ -50,8 +50,18 @@ class TasklistContainer extends React.Component {
     })
   }
 
+  editTask = (newTitle, id) => {
+    this.setState({
+      tasks: this.state.tasks.map(task => {
+        if(task.id === id) {
+          task.title = newTitle
+        }
+        return task;
+      })
+    })
+  }
+
   addTask = (taskTitle) => {
-    console.log(taskTitle)
     let newTask = {
       id: uuidv4(),
       title: taskTitle,
@@ -69,7 +79,12 @@ class TasklistContainer extends React.Component {
         <div className="inner">
           <Header />
           <InputTask addTask={this.addTask}/>
-          <Tasklist tasks={this.state.tasks} handleClickOnComplete={this.handleClickOnComplete} deleteTask={this.deleteTask} />
+          <Tasklist
+            tasks={this.state.tasks}
+            handleClickOnComplete={this.handleClickOnComplete}
+            deleteTask={this.deleteTask}
+            editTask={this.editTask}
+          />
         </div>
       </div>
     );
