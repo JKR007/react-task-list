@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import './App.css';
+import './functionBased/App.css';
 
-import TasklistContainer from './components/TasklistContainer';
+import TasklistContainer from './functionBased/components/TasklistContainer';
 
 ReactDOM.render(<TasklistContainer />, document.getElementById('root'));

@@ -9,23 +9,7 @@ import InputTask from './InputTask';
 class TasklistContainer extends React.Component {
 
   state = {
-    tasks: [
-      {
-        id: uuidv4(),
-        title: 'Find a good girl who looks after to mom and marry to her!',
-        completed: true
-      },
-      {
-        id: uuidv4(),
-        title: 'Marry this year!',
-        completed: false
-      },
-      {
-        id: uuidv4(),
-        title: 'Make 3 sons!',
-        completed: false
-      }
-    ]
+    tasks: []
   };
 
   handleClickOnComplete = (taskId) => {
@@ -72,6 +56,19 @@ class TasklistContainer extends React.Component {
     });
   }
 
+  componentDidMount() {
+    let storedItems = JSON.parse(localStorage.getItem('tasks'))
+    if(storedItems) {
+      this.setState({ tasks: storedItems })
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if(prevState.tasks !== this.state.task) {
+      let temp = JSON.stringify(this.state.tasks)
+      localStorage.setItem('tasks', temp)
+    }
+  }
 
   render() {
     return (

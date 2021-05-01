@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './TasklistItem.module.css'
 
 const TasklistItem = (props) => {
@@ -30,6 +30,12 @@ const TasklistItem = (props) => {
   } else {
     editMode.display = 'none'
   }
+
+  useEffect(() => {
+    return () => {
+      alert('The Task is to be deleted!')
+    };
+  }, []);
 
   return (
     <li className={styles.item}>
