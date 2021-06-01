@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import { Route, Switch } from 'react-router-dom';
 import { v4 as uuidv4 } from "uuid";
 
 import Tasklist from './Tasklist';
 import Header from './Header';
 import InputTask from './InputTask';
+import Navbar from './Navbar';
+import About from '../pages/About';
+import NotFound from '../pages/NotFound';
 
 const TasklistContainer = () => {
   const [tasks, setTasks] = useState(getInitialTasks())
@@ -63,18 +66,31 @@ const TasklistContainer = () => {
   }, [tasks])
 
   return (
-    <div className="container">
-      <div className="inner">
-        <Header />
-        <InputTask addTask={addTask}/>
-        <Tasklist
-          tasks={tasks}
-          handleClickOnComplete={handleClickOnComplete}
-          deleteTask={deleteTask}
-          editTask={editTask}
-        />
-      </div>
-    </div>
+    <>
+      <Navbar />
+      <Switch>
+        <Route exact path="/">
+          <div className="container">
+            <div className="inner">
+              <Header />
+              <InputTask addTask={addTask}/>
+              <Tasklist
+                tasks={tasks}
+                handleClickOnComplete={handleClickOnComplete}
+                deleteTask={deleteTask}
+                editTask={editTask}
+              />
+            </div>
+          </div>
+        </Route>
+        <Route path="/about">
+          <About />
+        </Route>
+        <Route path="*">
+          <NotFound />
+        </Route>
+      </Switch>
+    </>
   );
 }
 
